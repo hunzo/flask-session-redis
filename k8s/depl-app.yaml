@@ -1,0 +1,29 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp:
+  labels:
+    app: app
+  name: app
+  namespace: flask-session
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: app
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp:
+      labels:
+        app: app
+    spec:
+      containers:
+        - image: hunzo/flask-session-redis
+          name: flask-session-redis
+          env:
+            - name: REDIS_SERVER
+              value: redis.flask-session.svc.cluster.local
+          resources: {}
+status: {}
